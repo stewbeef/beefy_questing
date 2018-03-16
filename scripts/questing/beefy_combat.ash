@@ -156,6 +156,12 @@ buffer Delevel()
 	{//Entangling Noodles
 		deleveling.append(GenSkillAction("Entangling Noodles"));
 	}
+	if(my_class() != $class[Disco Bandit])
+	{//Entangling Noodles
+		deleveling.append(GenSkillAction("Disco Dance of Doom"));
+		deleveling.append(GenSkillAction("Disco Dance II: Electric Boogaloo"));
+		deleveling.append(GenSkillAction("Disco Dance 3: Back in the Habit"));
+	}
 	//Micrometeorite
 	deleveling.append(GenSkillAction("Micrometeorite"));
 
@@ -241,7 +247,7 @@ void CombatMeleePref()
     else if ( ! _deleveled)
     {
         //Delevel();
-        if ( ! will_usually_miss() || missattack = "")
+        if ( ! will_usually_miss() || missattack == "")
         {
             attack = hitattack;
         }
