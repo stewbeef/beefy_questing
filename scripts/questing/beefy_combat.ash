@@ -241,7 +241,7 @@ void CombatMeleePref()
     else if ( ! _deleveled)
     {
         //Delevel();
-        if ( ! will_usually_miss())
+        if ( ! will_usually_miss() || miss_attack = "")
         {
             attack = hitattack;
         }
