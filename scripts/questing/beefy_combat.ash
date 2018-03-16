@@ -247,11 +247,11 @@ void CombatMeleePref()
     else if ( ! _deleveled)
     {
         //Delevel();
-        if ( ! will_usually_miss() || missattack == "")
+		if ( (! will_usually_miss() || missattack == "") && hitattack != "")
         {
             attack = hitattack;
         }
-        else
+        else if (missattack != "")
         {
 			
             attack =missattack;
@@ -260,7 +260,7 @@ void CombatMeleePref()
     else
     {
 
-        attack = missattack;
+        attack = "attack;repeat;";
     }
     doCombatScript(attack); 
 }
