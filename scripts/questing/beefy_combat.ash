@@ -287,44 +287,7 @@ void CombatMeleePref()
     string attack;
 	string missattack = CombatPref("spell");
 	string hitattack = CombatPref("");
-	/*
-    switch(my_class())
-    {
-        case $class[Disco Bandit]:
-            hitattack = "attack; repeat;";
-            break;
-        case $class[Accordion Thief]:
-            hitattack = "attack; repeat;";
-            break;
-        case $class[seal clubber]:
-			hitattack = GetSCattack("willhit");
-            break;
-        case $class[turtle tamer]:
-            hitattack = GetTTattack();
-            break;
-		default:
-			hitattack = "skill saucestorm; repeat;";
-			break;
-    }
-	switch(my_class())
-    {
-        case $class[Disco Bandit]:
-            missattack = "skill saucestorm; repeat;";
-            break;
-        case $class[Accordion Thief]:
-            missattack = "skill saucestorm; repeat;";
-            break;
-        case $class[seal clubber]:
-			missattack = GetSCattack("willmiss");
-            break;
-        case $class[turtle tamer]:
-            missattack = "skill saucestorm; repeat;";
-            break;
-		default:
-			missattack = "skill saucestorm; repeat;";
-			break;
-    }
-	*/
+
     if((! will_usually_miss() ))
     {
         attack = hitattack;
@@ -387,43 +350,6 @@ void StaggerActions()
 
     doCombatScript(staggeractions);
 }
-/*
-void main(string req)
-{
-	string [int] arry = req.split_string(",");
-	if(arry.count() == 2)
-	{
-		if(arry[0] == "choose")
-		{
-			skdmg [int] bdmgs = best_spells(arry[1].to_monster());
-			foreach num in bdmgs
-			{
-				print(bdmgs[num].sk.to_string() + " : " + bdmgs[num].dmg.to_string());
-			}
-		}
-		else
-		{
-			print(damage_dealt(arry[0].to_skill(),arry[1].to_monster()).to_string());
-		}
-	}
-	else
-	{
-		
-		if(arry[0] == "choose")
-		{
-			skdmg [int] bdmgs = best_spells();
-			foreach num in bdmgs
-			{
-				print(bdmgs[num].sk.to_string() + " : " + bdmgs[num].dmg.to_string());
-			}
-		}
-		else
-		{
-			print(damage_dealt(arry[0].to_skill()).to_string());
-		}
-	}
-}
-*/
 void main()
 {
     _deleveled = false;
