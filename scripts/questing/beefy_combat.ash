@@ -223,74 +223,9 @@ buffer CombatPref(string sktype)
 			break;
 		}
 	}
+	print(attack);
 
     return attack;
-}
-
-buffer GetTTattack()
-{
-	buffer ttattack;
-	/*
-    if (have_skill(to_skill(2005)))
-    {
-        return "skill Shieldbutt; repeat;";
-    }
-    else if (have_skill(to_skill(2015)))
-    {
-        return "skill Kneebutt; repeat;";
-    }
-    else if (have_skill(to_skill(2003)))
-    {
-        return "skill Headbutt; repeat;";
-    }*/
-
-	ttattack.append("attack; repeat;");
-    return ttattack;
-}
-
-buffer AllTheSmacks()
-{
-	buffer scattack;
-	//Thrust-Smack
-	scattack.append(GenWhileSkillAction(1003));
-	//Lunge Smack
-	scattack.append(GenWhileSkillAction(1004));
-	//Clobber
-	scattack.append(GenWhileSkillAction(1022));
-
-	return scattack;
-
-}
-
-buffer GetSCattack(string type)
-{
-	buffer scattack;	
-	switch(type)
-	{
-		case "magic":
-			scattack.append("skill saucestorm;");
-		break;
-		case "fight":
-			scattack.append("attack;repeat;");
-		break;
-		case "willhit":
-			scattack.append("attack;repeat;");
-		break;
-		case "willmiss":
-			if(equipped_item($slot[weapon]).item_type() == "club")
-			{
-				scattack.append(AllTheSmacks());
-			}
-			else
-			{
-				scattack.append("skill saucestorm;");
-			}
-		break;
-	}
-	scattack = MakeSub(scattack,"myattack");
-	scattack.append("call myattack;");
-	scattack.append("repeat;");
-	return scattack;
 }
 
 void CombatMeleePref()
@@ -369,7 +304,7 @@ void main()
 
     GhostBust();
 	print("to stagger actions");
-    //StaggerActions();
+    StaggerActions();
 	
     if((! will_usually_dodge()) && (_deleveled == false))
     {
