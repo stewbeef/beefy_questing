@@ -104,10 +104,12 @@ buffer GenItemAction(item it)
 //
 void doCombatScript(string script)
 {
+	print(script);
     visit_url("fight.php?action=macro&macrotext=" + url_encode(script) ,true,true);
 }
 void doCombatScript(buffer script)
 {
+	print(script.to_string());
     doCombatScript(to_string(script));
 }
 
