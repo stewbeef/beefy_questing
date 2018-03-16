@@ -201,7 +201,7 @@ buffer CombatMagicPref()
 buffer CombatPref(string sktype)
 {
     buffer attack;
-	skdmg [int] bdmgs = best_skills("sktype");
+	skdmg [int] bdmgs = best_skills(sktype);
 	foreach num in bdmgs
 	{
 		string skstring;
