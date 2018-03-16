@@ -177,7 +177,7 @@ buffer Delevel()
 buffer CombatMagicPref()
 {
     buffer mattack;
-	skdmg [int] bdmgs = best_spells();
+	skdmg [int] bdmgs = best_skills("spell");
 	foreach num in bdmgs
 	{
 		if (sk_cast_once contains bdmgs[num].sk)
@@ -267,6 +267,20 @@ void CombatMeleePref()
     string attack;
 	string missattack;
 	string hitattack;
+	skdmg [int] bdmgs = best_skills();
+	foreach num in bdmgs
+	{
+		if (sk_cast_once contains bdmgs[num].sk)
+		{
+			hitattack.append("skill " + bdmgs[num].sk + ";");
+		}
+		else
+		{
+			hitattack.append("skill " + bdmgs[num].sk + "; repeat;");
+			break;
+		}
+	}
+/*
     switch(my_class())
     {
         case $class[Disco Bandit]:
@@ -284,7 +298,10 @@ void CombatMeleePref()
 		default:
 			hitattack = "skill saucestorm; repeat;";
 			break;
-    }
+	}
+*/
+	miiss_attack = CombatMagicPref();
+	/*
 	switch(my_class())
     {
         case $class[Disco Bandit]:
@@ -303,7 +320,7 @@ void CombatMeleePref()
 			missattack = "skill saucestorm; repeat;";
 			break;
     }
-
+*/
     if((! will_usually_miss() ))
     {
         attack = hitattack;
