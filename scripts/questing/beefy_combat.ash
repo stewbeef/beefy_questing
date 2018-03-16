@@ -104,12 +104,12 @@ buffer GenItemAction(item it)
 //
 void doCombatScript(string script)
 {
-	print(script);
+	//print(script);
     visit_url("fight.php?action=macro&macrotext=" + url_encode(script) ,true,true);
 }
 void doCombatScript(buffer script)
 {
-	print(script.to_string());
+	//print(script.to_string());
     doCombatScript(to_string(script));
 }
 
@@ -223,7 +223,7 @@ buffer CombatPref(string sktype)
 			break;
 		}
 	}
-	print(attack);
+	//print(attack);
 
     return attack;
 }
@@ -303,23 +303,23 @@ void main()
 	doCombatScript(Gathering());
 
     GhostBust();
-	print("to stagger actions");
+	//print("to stagger actions");
     StaggerActions();
 	
     if((! will_usually_dodge()) && (_deleveled == false))
     {
-		print("to delevel actions");
+		//print("to delevel actions");
 		doCombatScript(Delevel());
     }
 
     if(my_class().primestat == $stat[Muscle] || my_class().primestat == $stat[Moxie])
     {//does not handle $class[none] atm
-		print("to possible physical attack actions");
+		//print("to possible physical attack actions");
         CombatMeleePref();
     }
     else
     {
-		print("to magic attack actions");
+		//print("to magic attack actions");
         doCombatScript(CombatMagicPref());
     }
 }
