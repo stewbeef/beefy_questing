@@ -156,7 +156,7 @@ buffer Delevel()
 	{//Entangling Noodles
 		deleveling.append(GenSkillAction("Entangling Noodles"));
 	}
-	if(my_class() != $class[Disco Bandit])
+	if(my_class() == $class[Disco Bandit])
 	{//Entangling Noodles
 		deleveling.append(GenSkillAction("Disco Dance of Doom"));
 		deleveling.append(GenSkillAction("Disco Dance II: Electric Boogaloo"));
@@ -240,7 +240,7 @@ void CombatMeleePref()
 	string missattack = CombatPref("spell");
 	string hitattack = CombatPref("");
 
-    if((! will_usually_miss() ))
+    if((! will_usually_miss() ) && hitattack != "")
     {
         attack = hitattack;
     }
@@ -256,12 +256,15 @@ void CombatMeleePref()
 			
             attack =missattack;
         }
+		else
+		{
+			attack = "attack;repeat;";
+		}
     }
-    else
-    {
-
-        attack = "attack;repeat;";
-    }
+	else
+	{
+		attack = "attack;repeat;";
+	}
     doCombatScript(attack); 
 }
 
