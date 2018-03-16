@@ -202,13 +202,22 @@ buffer CombatPref(string sktype)
 	skdmg [int] bdmgs = best_skills("sktype");
 	foreach num in bdmgs
 	{
-		if (sk_cast_once contains bdmgs[num].sk)
+		string skstring;
+		if(bdmgs[num].sk == $skill[none])
 		{
-			attack.append("skill " + bdmgs[num].sk + ";");
+			skstring = "attack;";
 		}
 		else
 		{
-			attack.append("skill " + bdmgs[num].sk + "; repeat;");
+			skstring = "skill " + bdmgs[num].sk + ";";
+		}
+		if (sk_cast_once contains bdmgs[num].sk)
+		{
+			attack.append(skstring);
+		}
+		else
+		{
+			attack.append(skstring + " repeat;");
 			break;
 		}
 	}
