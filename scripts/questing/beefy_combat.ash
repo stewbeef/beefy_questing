@@ -182,29 +182,7 @@ buffer Delevel()
 	//doCombat(delevels);
 }
 
-buffer CombatMagicPref()
-{
-    buffer mattack;
-	skdmg [int] bdmgs = best_skills("spell");
-	foreach num in bdmgs
-	{
-		if (sk_cast_once contains bdmgs[num].sk)
-		{
-			mattack.append("skill " + bdmgs[num].sk + ";");
-		}
-		else
-		{
-			mattack.append("skill " + bdmgs[num].sk + "; repeat;");
-			break;
-		}
-	}
-
-	mattack.append("skill saucestorm; repeat;");
-    return mattack;
-	//doCombatScript(mattack);
-}
-
-buffer CombatPref(string sktype)
+buffer AttackPlan(string sktype)
 {
     buffer attack;
 	skdmg [int] bdmgs = best_skills(sktype);
@@ -219,7 +197,7 @@ buffer CombatPref(string sktype)
 		{
 			skstring = "skill " + bdmgs[num].sk + ";";
 		}
-		if (sk_cast_once contains bdmgs[num].sk)
+		if (bdmgs[num].cmbtsk.props["once"] = true)
 		{
 			attack.append(skstring);
 		}
@@ -233,41 +211,6 @@ buffer CombatPref(string sktype)
 
     return attack;
 }
-
-void CombatMeleePref()
-{
-    string attack;
-	string missattack = CombatPref("spell");
-	string hitattack = CombatPref("");
-
-    if((! will_usually_miss() ) && hitattack != "")
-    {
-        attack = hitattack;
-    }
-    else if ( ! _deleveled)
-    {
-        //Delevel();
-		if ( (! will_usually_miss() || missattack == "") && hitattack != "")
-        {
-            attack = hitattack;
-        }
-        else if (missattack != "")
-        {
-			
-            attack =missattack;
-        }
-		else
-		{
-			attack = "attack;repeat;";
-		}
-    }
-	else
-	{
-		attack = "attack;repeat;";
-	}
-    doCombatScript(attack); 
-}
-
 
 void GhostBust()
 {
@@ -321,14 +264,13 @@ void main()
 		doCombatScript(Delevel());
     }
 
-    if(my_class().primestat == $stat[Muscle] || my_class().primestat == $stat[Moxie])
-    {//does not handle $class[none] atm
-		//print("to possible physical attack actions");
-        CombatMeleePref();
-    }
-    else
+    if((will_usually_miss() ) && (my_class().primestat == $stat[Muscle] || my_class().primestat == $stat[Moxie]))
     {
-		//print("to magic attack actions");
-        doCombatScript(CombatMagicPref());
+        if(!_deleveled)
+		{
+			Delevel();
+		}
     }
+	string attack = AttackPlan("");
+    doCombatScript(attack); 
 }
