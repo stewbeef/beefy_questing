@@ -197,7 +197,7 @@ buffer AttackPlan(string sktype)
 		{
 			skstring = "skill " + bdmgs[num].sk + ";";
 		}
-		if (bdmgs[num].cmbtsk.props["once"] = true)
+		if (bdmgs[num].cmbtsk.props["once"] == true)
 		{
 			attack.append(skstring);
 		}
