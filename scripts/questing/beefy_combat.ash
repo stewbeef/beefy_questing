@@ -185,7 +185,7 @@ buffer Delevel()
 buffer AttackPlan(string sktype)
 {
     buffer attack;
-	skdmg [int] bdmgs = best_skills(sktype);
+	skdmg [int] bdmgs = best_skills(sktype, mon_init(last_monster(),false));
 	foreach num in bdmgs
 	{
 		string skstring;
